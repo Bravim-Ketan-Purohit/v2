@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2"><%= customer.firstName  %> <%= customer.lastName  %></h1>
+  <div class="btn-toolbar mb-2 mb-md 0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+    </div>
+  </div>
+</div>
+
+<div class="col py-3">
+
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+          <li class="breadcrumb-item active"><%= customer.firstName  %></li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col text-end fw-lighter">
+      <b>Last Updated <%= new Date(customer.updatedAt).toUTCString() %> </b>
+      <b>UserId:</b> <%= customer._id %>
+    </div>
+  </div>
+
+</div>
+
+<ul class="list-group">
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>Name:</b></div>
+      <div class="col"><%= customer.firstName %> <%= customer.lastName %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>Tel:</b></div>
+      <div class="col"><%= customer.tel %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>Email:</b></div>
+      <div class="col"><%= customer.email %></div>
+    </div>
+  </li>
+<!-- ----------------------------------- -->
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>redBloodCellCount:</b></div>
+      <div class="col"><%= customer.redBloodCellCount %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>hemoglobin:</b></div>
+      <div class="col"><%= customer.hemoglobin %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>hematocrit:</b></div>
+      <div class="col"><%= customer.hematocrit %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>meanCorpuscularVolume:</b></div>
+      <div class="col"><%= customer.meanCorpuscularVolume %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>meanCorpuscularHemoglobin:</b></div>
+      <div class="col"><%= customer.meanCorpuscularHemoglobin %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>meanCorpuscularHemoglobinConcentration:</b></div>
+      <div class="col"><%= customer.meanCorpuscularHemoglobinConcentration %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>whiteBloodCellCount:</b></div>
+      <div class="col"><%= customer.whiteBloodCellCount %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>plateletCount:</b></div>
+      <div class="col"><%= customer.plateletCount %></div>
+    </div>
+  </li>
+<!-- ----------------------------------- -->
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>Details:</b></div>
+      <div class="col"><%= customer.details %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>Date Created:</b></div>
+      <div class="col"><%= customer.createdAt %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: auto"> <b>Date Modified:</b></div>
+      <div class="col"><%= customer.updatedAt %></div>
+    </div>
+  </li>
+
+</ul>
