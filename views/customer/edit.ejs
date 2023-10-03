@@ -58,11 +58,13 @@
   </div>
 
   <div class="form-group mb-4">
-    <button type="submit" class="btn btn-primary">Update Customer</button>
+    <button type="submit" class="btn btn-primary">Update Report details</button>
 
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">Delete Customer</button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">Delete Report</button>
 
   </div>
+
+  <h4 class="form-group mb-4 text-danger">the report details cannot be edited delete this report and create a new one</h4>
 
 </form>
 
@@ -72,19 +74,19 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <div class="modal-title">You are about to remove a customer record.</div>
+        <div class="modal-title">You are about to remove your report.</div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <p>
-          This will remove the customer record of <b class="fw-bold"><%= customer.firstName %> <%= customer.lastName %></b><br/>
+          This will remove the your report of <b class="fw-bold"><%= customer.firstName %> <%= customer.lastName %></b><br/>
           Are you sure?
         </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <form action="/edit/<%= customer._id %>?_method=DELETE" method="POST" class="position-relative">
-          <button type="submit" class="btn btn-primary">Yes, Remove Customer</button>
+          <button type="submit" class="btn btn-primary">Yes, Remove Report</button>
         </form>
       </div>
     </div>

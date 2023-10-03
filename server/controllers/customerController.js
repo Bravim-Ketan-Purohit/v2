@@ -146,6 +146,26 @@ exports.view = async (req, res) => {
 
 }
 
+/**
+ * GET /
+ * Compare Customer Data 
+*/
+// exports.compareReports = async(req,res)=>{
+//   try {
+//     const email= req.body.email,
+//     const customerReportsCompare = Customer.filter(Customer => Customer.firstName === firstName);
+//     if (customerReportsCompare.length < 2){
+//       res.status(400).json({
+//         error:'Insuffecient Data for comaprision'
+//       })
+//       const {report1,report2} = customerReportsCompare.slice(-2);
+//       return res.status(200).json({report1,report2})
+//     }
+//   } catch (error) {
+    
+//   }
+// }
+
 
 
 /**
