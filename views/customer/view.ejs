@@ -4,11 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src=
-      "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js">
-	  </script> 
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>   
-  <title>Customer Details</title>
+    <title>Customer Details</title>
     <style>
         .green-text {
             color: green;
@@ -21,8 +17,13 @@
         .yellow-text {
             color: rgb(255, 128, 0);
         }
+
+        .chart-container {
+            margin-bottom: 20px;
+        }
     </style>
-    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 </head>
 
 <body>
@@ -35,268 +36,478 @@
             </div>
         </div>
     </div>
+
     <div id="makepdf">
-    <div class="col py-3" >
-        <div class="row">
-            <div class="col">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><%= customer.firstName %></li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="col text-end fw-lighter">
-                <b>Last Updated <%= new Date(customer.updatedAt).toUTCString() %> </b>
-                <b>UserId:</b> <%= customer._id %>
+        <div class="col py-3">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><%= customer.firstName %></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col text-end fw-lighter">
+                    <b>Last Updated <%= new Date(customer.updatedAt).toUTCString() %> </b>
+                    <b>UserId:</b> <%= customer._id %>
+                </div>
             </div>
         </div>
-    </div>
 
-    <ul class="list-group ">
-        <li class="list-group-item" >
-            <div class="row">
-                <div class="col" style="max-width: auto"> <b>Name:</b></div>
-                <div class="col"><%= customer.firstName %> <%= customer.lastName %></div>
-            </div>
-        </li>
-
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col" style="max-width: auto"> <b>Tel:</b></div>
-                <div class="col"><%= customer.tel %></div>
-            </div>
-        </li>
-
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col" style="max-width: auto"> <b>Email:</b></div>
-                <div class="col"><%= customer.email %></div>
-            </div>
-        </li>
-
-        <% const attributes = [
-            {
-                name: "redBloodCellCount",
-                label: "Red Blood Cell Count",
-                min: 4.5,
-                max: 5.5,
-                remedies: {
-                    low: [
-                        "Increase iron intake through foods like spinach, red meat, and lentils.",
-                        "Include vitamin B12-rich foods like fish, eggs, and dairy.",
-                        "Consider iron supplements if recommended by a doctor."
-                    ],
-                    high: [
-                        "Stay hydrated to help normalize blood volume.",
-                        "Avoid excessive iron intake from supplements or foods."
-                    ]
-                }
-            },
-            {
-                name: "hemoglobin",
-                label: "Hemoglobin",
-                min: 13.5,
-                max: 17.5,
-                remedies: {
-                    low: [
-                        "Increase iron-rich foods like lean meat, beans, and green leafy vegetables.",
-                        "Consume foods high in vitamin C to aid iron absorption.",
-                        "Consider iron supplements under medical guidance."
-                    ],
-                    high: [
-                        "Stay well-hydrated by drinking plenty of water.",
-                        "Avoid excessive iron supplements or iron-rich foods."
-                    ]
-                }
-            },
-            {
-                name: "hematocrit",
-                label: "Hematocrit",
-                min: 38.8,
-                max: 50.0,
-                remedies: {
-                    low: [
-                        "Focus on iron-rich foods and vitamin B6 to support red blood cell production.",
-                        "Consider a diet rich in folate, such as dark green vegetables."
-                    ],
-                    high: [
-                        "Stay well-hydrated.",
-                        "Exercise regularly to improve blood flow."
-                    ]
-                }
-            },
-            {
-                name: "meanCorpuscularVolume",
-                label: "Mean Corpuscular Volume",
-                min: 80.0,
-                max: 100.0,
-                remedies: {
-                    low: [
-                        "Consume more iron, B vitamins, and foods like whole grains and nuts."
-                    ],
-                    high: [
-                        "Ensure a balanced diet with essential nutrients.",
-                        "Limit alcohol consumption."
-                    ]
-                }
-            },
-            {
-                name: "meanCorpuscularHemoglobin",
-                label: "Mean Corpuscular Hemoglobin",
-                min: 27.0,
-                max: 33.0,
-                remedies: {
-                    low: [
-                        "Focus on iron-rich foods and vitamin B6."
-                    ],
-                    high: [
-                        "Maintain a balanced diet with a variety of nutrients."
-                    ]
-                }
-            },
-            {
-                name: "meanCorpuscularHemoglobinConcentration",
-                label: "Mean Corpuscular Hemoglobin Concentration",
-                min: 32.0,
-                max: 36.0,
-                remedies: {
-                    low: [
-                        "Focus on iron-rich foods and vitamin B6.",
-                        "Stay well-hydrated."
-                    ],
-                    high: [
-                        "Consume a balanced diet with a variety of nutrients.",
-                        "Stay hydrated."
-                    ]
-                }
-            },
-            {
-                name: "whiteBloodCellCount",
-                label: "White Blood Cell Count",
-                min: 4000,
-                max: 11000,
-                remedies: {
-                    low: [
-                        "Include immune-boosting foods like garlic, ginger, and yogurt.",
-                        "Avoid exposure to sick individuals."
-                    ],
-                    high: [
-                        "Rest and get adequate sleep.",
-                        "Avoid strenuous activities and stressful situations."
-                    ]
-                }
-            },
-            {
-                name: "plateletCount",
-                label: "Platelet Count",
-                min: 150000,
-                max: 450000,
-                remedies: {
-                    low: [
-                        "Consume foods rich in vitamin K, like leafy greens and broccoli.",
-                        "Avoid activities that may cause bleeding or injury."
-                    ],
-                    high: [
-                        "Stay well-hydrated.",
-                        "Monitor and manage any underlying health conditions."
-                    ]
-                }
-            }
-        ]; %>
-
-        <% attributes.forEach(attribute => { %>
+        <ul class="list-group">
             <li class="list-group-item">
                 <div class="row">
-                    <div class="col" style="max-width: auto"> <b><%= attribute.label %>:</b></div>
-                    <div class="col">
-                        <% const value = customer[attribute.name];
-                            const min = attribute.min;
-                            const max = attribute.max;
-                            const borderlineRange = (max - min) * 0.1; // Calculate 10% of the range
+                    <div class="col" style="max-width: auto"> <b>Name:</b></div>
+                    <div class="col"><%= customer.firstName %> <%= customer.lastName %></div>
+                </div>
+            </li>
 
-                            if (value >= min && value <= max) { %>
-                                <span class="green-text"><%= value %></span>
-                                <span class="green-text"> (In Range)</span>
-                                <p class="green-text">Good job!</p>
-                            <% } else if (value < min) {
-                                if (value >= min - borderlineRange) { %>
-                                    <span class="yellow-text"><%= value %></span>
-                                    <span class="yellow-text"> (Borderline Low)</span>
-                                    <ul class="yellow-text">
-                                        <% attribute.remedies.low.forEach(remedy => { %>
-                                            <li><%= remedy %></li>
-                                        <% }); %>
-                                    </ul>
-                                <% } else { %>
-                                    <span class="red-text"><%= value %></span>
-                                    <span class="red-text"> (Low)</span>
-                                    <ul class="red-text">
-                                        <% attribute.remedies.low.forEach(remedy => { %>
-                                            <li><%= remedy %></li>
-                                        <% }); %>
-                                    </ul>
-                                <% }
-                            } else {
-                                if (value <= max + borderlineRange) { %>
-                                    <span class="yellow-text"><%= value %></span>
-                                    <span class="yellow-text"> (Borderline High)</span>
-                                    <ul class="yellow-text">
-                                        <% attribute.remedies.high.forEach(remedy => { %>
-                                            <li><%= remedy %></li>
-                                        <% }); %>
-                                    </ul>
-                                <% } else { %>
-                                    <span class="red-text"><%= value %></span>
-                                    <span class="red-text"> (High)</span>
-                                    <ul class="red-text">
-                                        <% attribute.remedies.high.forEach(remedy => { %>
-                                            <li><%= remedy %></li>
-                                        <% }); %>
-                                    </ul>
-                                <% }
-                            } %>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col" style="max-width: auto"> <b>Tel:</b></div>
+                    <div class="col"><%= customer.tel %></div>
+                </div>
+            </li>
+
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col" style="max-width: auto"> <b>Email:</b></div>
+                    <div class="col"><%= customer.email %></div>
+                </div>
+            </li>
+
+            <% const attributes = [
+    {
+        name: "redBloodCellCount",
+        label: "Red Blood Cell Count",
+        min: 4.5,
+        max: 5.5,
+        remedies: {
+            low: [
+                "Increase iron intake through foods like spinach, red meat, and lentils.",
+                "Include vitamin B12-rich foods like fish, eggs, and dairy.",
+                "Consider iron supplements if recommended by a doctor.",
+                "Check for any gastrointestinal bleeding which may be causing low RBC count.",
+                "Rule out chronic diseases or conditions that may affect RBC production."
+            ],
+            high: [
+                "Stay well-hydrated to help normalize blood volume.",
+                "Avoid excessive iron intake from supplements or foods.",
+                "Consult a doctor to rule out conditions like polycythemia vera.",
+                "Monitor oxygen levels, as high RBC count may affect blood viscosity.",
+                "Evaluate kidney function, as it can impact RBC production."
+            ]
+        },
+        causes: {
+            low: [
+                "Iron deficiency",
+                "Vitamin B12 deficiency",
+                "Folate deficiency",
+                "Chronic diseases (e.g., kidney disease, rheumatoid arthritis)",
+                "Bone marrow disorders",
+                "Gastrointestinal bleeding",
+                "Hemolysis (destruction of red blood cells)",
+                "Nutritional deficiencies"
+            ],
+            high: [
+                "Dehydration",
+                "Chronic hypoxia (low oxygen levels)",
+                "Smoking",
+                "Polycythemia vera (a bone marrow disorder)",
+                "Lung diseases (e.g., chronic obstructive pulmonary disease)",
+                "Congenital heart disease",
+                "Kidney tumors producing erythropoietin"
+            ]
+        }
+    },
+    {
+        name: "hemoglobin",
+        label: "Hemoglobin",
+        min: 13.5,
+        max: 17.5,
+        remedies: {
+            low: [
+                "Increase iron-rich foods like lean meat, beans, and green leafy vegetables.",
+                "Consume foods high in vitamin C to aid iron absorption.",
+                "Consider iron supplements under medical guidance.",
+                "Rule out gastrointestinal bleeding or menstrual blood loss.",
+                "Check for any underlying chronic illnesses affecting hemoglobin production."
+            ],
+            high: [
+                "Stay well-hydrated by drinking plenty of water.",
+                "Avoid excessive iron supplements or iron-rich foods.",
+                "Monitor oxygen levels to ensure proper oxygenation of tissues.",
+                "Consult a doctor for further evaluation of high hemoglobin levels.",
+                "Consider therapeutic phlebotomy to reduce excess red blood cells."
+            ]
+        },
+        causes: {
+            low: [
+                "Iron deficiency anemia",
+                "Vitamin B12 deficiency anemia",
+                "Folate deficiency anemia",
+                "Chronic diseases (e.g., kidney disease, inflammatory disorders)",
+                "Hemolysis (destruction of red blood cells)",
+                "Gastrointestinal bleeding",
+                "Bone marrow disorders"
+            ],
+            high: [
+                "Dehydration",
+                "Chronic hypoxia (low oxygen levels)",
+                "Smoking",
+                "Polycythemia vera",
+                "Lung diseases (e.g., chronic obstructive pulmonary disease)",
+                "Congenital heart disease"
+            ]
+        }
+    },
+    {
+        name: "hematocrit",
+        label: "Hematocrit",
+        min: 38.8,
+        max: 50.0,
+        remedies: {
+            low: [
+                "Focus on iron-rich foods and vitamin B6 to support red blood cell production.",
+                "Consider a diet rich in folate, such as dark green vegetables."
+            ],
+            high: [
+                "Stay well-hydrated.",
+                "Exercise regularly to improve blood flow."
+            ]
+        },
+        causes: {
+            low: [
+                "Iron deficiency anemia",
+                "Vitamin B6 deficiency",
+                "Folate deficiency",
+                "Chronic diseases (e.g., kidney disease, inflammatory disorders)",
+                "Hemolysis (destruction of red blood cells)",
+                "Gastrointestinal bleeding",
+                "Bone marrow disorders"
+            ],
+            high: [
+                "Dehydration",
+                "Chronic hypoxia (low oxygen levels)",
+                "Polycythemia vera",
+                "Lung diseases (e.g., chronic obstructive pulmonary disease)",
+                "Congenital heart disease"
+            ]
+        }
+    },
+    {
+        name: "meanCorpuscularVolume",
+        label: "Mean Corpuscular Volume",
+        min: 80.0,
+        max: 100.0,
+        remedies: {
+            low: [
+                "Consume more iron, B vitamins, and foods like whole grains and nuts."
+            ],
+            high: [
+                "Ensure a balanced diet with essential nutrients.",
+                "Limit alcohol consumption."
+            ]
+        },
+        causes: {
+            low: [
+                "Iron deficiency anemia",
+                "Thalassemia",
+                "Lead poisoning",
+                "Chronic diseases (e.g., chronic kidney disease)",
+                "Sideroblastic anemia"
+            ],
+            high: [
+                "Vitamin B12 deficiency",
+                "Folate deficiency",
+                "Liver disease",
+                "Alcoholism",
+                "Medication side effects (e.g., certain chemotherapy drugs)"
+            ]
+        }
+    },
+    {
+        name: "meanCorpuscularHemoglobin",
+        label: "Mean Corpuscular Hemoglobin",
+        min: 27.0,
+        max: 33.0,
+        remedies: {
+            low: [
+                "Focus on iron-rich foods and vitamin B6."
+            ],
+            high: [
+                "Maintain a balanced diet with a variety of nutrients."
+            ]
+        },
+        causes: {
+            low: [
+                "Iron deficiency anemia",
+                "Thalassemia",
+                "Lead poisoning",
+                "Sideroblastic anemia",
+                "Chronic diseases (e.g., chronic kidney disease)"
+            ],
+            high: [
+                "Hemolytic anemias",
+                "Vitamin B12 deficiency",
+                "Folate deficiency",
+                "Liver disease",
+                "Hypothyroidism"
+            ]
+        }
+    },
+    {
+        name: "meanCorpuscularHemoglobinConcentration",
+        label: "Mean Corpuscular Hemoglobin Concentration",
+        min: 32.0,
+        max: 36.0,
+        remedies: {
+            low: [
+                "Focus on iron-rich foods and vitamin B6.",
+                "Stay well-hydrated."
+            ],
+            high: [
+                "Consume a balanced diet with a variety of nutrients.",
+                "Stay hydrated."
+            ]
+        },
+        causes: {
+            low: [
+                "Iron deficiency anemia",
+                "Thalassemia",
+                "Lead poisoning",
+                "Sideroblastic anemia"
+            ],
+            high: [
+                "Hereditary spherocytosis",
+                "Autoimmune hemolytic anemia",
+                "Burn injuries",
+                "Dehydration",
+                "Hemolytic anemias"
+            ]
+        }
+    },
+    {
+        name: "whiteBloodCellCount",
+        label: "White Blood Cell Count",
+        min: 4000,
+        max: 11000,
+        remedies: {
+            low: [
+                "Include immune-boosting foods like garlic, ginger, and yogurt.",
+                "Avoid exposure to sick individuals."
+            ],
+            high: [
+                "Rest and get adequate sleep.",
+                "Avoid strenuous activities and stressful situations."
+            ]
+        },
+        causes: {
+            low: [
+                "Bone marrow disorders (e.g., aplastic anemia)",
+                "Viral infections (e.g., HIV)",
+                "Autoimmune disorders (e.g., lupus)",
+                "Medication side effects (e.g., chemotherapy)",
+                "Radiation therapy",
+                "Malnutrition"
+            ],
+            high: [
+                "Bacterial infections",
+                "Viral infections (e.g., Epstein-Barr virus)",
+                "Inflammatory disorders (e.g., rheumatoid arthritis)",
+                "Leukemia",
+                "Smoking",
+                "Stress or trauma"
+            ]
+        }
+    },
+    {
+        name: "plateletCount",
+        label: "Platelet Count",
+        min: 150000,
+        max: 450000,
+        remedies: {
+            low: [
+                "Consume foods rich in vitamin K, like leafy greens and broccoli.",
+                "Avoid activities that may cause bleeding or injury."
+            ],
+            high: [
+                "Stay well-hydrated.",
+                "Monitor and manage any underlying health conditions."
+            ]
+        },
+        causes: {
+            low: [
+                "Immune thrombocytopenia",
+                "Medication side effects (e.g., chemotherapy)",
+                "Bone marrow disorders (e.g., aplastic anemia)",
+                "Viral infections (e.g., HIV)",
+                "Cirrhosis (liver disease)"
+            ],
+            high: [
+                "Essential thrombocythemia",
+                "Reactive thrombocytosis (e.g., after surgery or trauma)",
+                "Inflammatory disorders (e.g., rheumatoid arthritis)",
+                "Infection",
+                "Iron-deficiency anemia"
+            ]
+        }
+    }
+]; %>
+
+
+            <% attributes.forEach(attribute => { %>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col" style="max-width: auto"> <b><%= attribute.label %>:</b></div>
+            <div class="col">
+                <div class="chart-container" style="width: 400px; height: 120px;">
+                    <div id="<%= attribute.name %>_chart"></div>
+                </div>
+                <% const value = customer[attribute.name];
+                    const min = attribute.min;
+                    const max = attribute.max;
+                    const borderlineRange = (max - min) * 0.1; // Calculate 10% of the range
+                    const dynamicMax = max + (max - min) * 0.5; // Set dynamic max
+                    const dynamicMin = min - (max - min) * 0.5; // Set dynamic min
+
+                    if (value >= min && value <= max) { %>
+                        <span class="green-text"><%= value %></span>
+                        <span class="green-text"> (In Range)</span>
+                        <p class="green-text">Good job!</p>
+                    <% } else if (value < min) {
+                        if (value >= min - borderlineRange) { %>
+                            <span class="yellow-text"><%= value %></span>
+                            <span class="yellow-text"> (Borderline Low)</span>
+                            <ul class="yellow-text">
+                                <% attribute.remedies.low.forEach(remedy => { %>
+                                    <li><%= remedy %></li>
+                                <% }); %>
+                            </ul>
+                            <p class="yellow-text"><b>Possible Causes:</b></p>
+                            <ul class="yellow-text">
+                                <% const randomCauses = attribute.causes.low.sort(() => Math.random() - 0.5).slice(0, 2);
+                                    randomCauses.forEach(cause => { %>
+                                    <li><%= cause %></li>
+                                <% }); %>
+                            </ul>
+                        <% } else { %>
+                            <span class="red-text"><%= value %></span>
+                            <span class="red-text"> (Low)</span>
+                            <ul class="red-text">
+                                <% attribute.remedies.low.forEach(remedy => { %>
+                                    <li><%= remedy %></li>
+                                <% }); %>
+                            </ul>
+                            <p class="red-text"><b>Possible Causes:</b></p>
+                            <ul class="red-text">
+                                <% const randomCauses = attribute.causes.low.sort(() => Math.random() - 0.5).slice(0, 2);
+                                    randomCauses.forEach(cause => { %>
+                                    <li><%= cause %></li>
+                                <% }); %>
+                            </ul>
+                        <% }
+                    } else {
+                        if (value <= max + borderlineRange) { %>
+                            <span class="yellow-text"><%= value %></span>
+                            <span class="yellow-text"> (Borderline High)</span>
+                            <ul class="yellow-text">
+                                <% attribute.remedies.high.forEach(remedy => { %>
+                                    <li><%= remedy %></li>
+                                <% }); %>
+                            </ul>
+                            <p class="yellow-text"><b>Possible Causes:</b></p>
+                            <ul class="yellow-text">
+                                <% const randomCauses = attribute.causes.high.sort(() => Math.random() - 0.5).slice(0, 2);
+                                    randomCauses.forEach(cause => { %>
+                                    <li><%= cause %></li>
+                                <% }); %>
+                            </ul>
+                        <% } else { %>
+                            <span class="red-text"><%= value %></span>
+                            <span class="red-text"> (High)</span>
+                            <ul class="red-text">
+                                <% attribute.remedies.high.forEach(remedy => { %>
+                                    <li><%= remedy %></li>
+                                <% }); %>
+                            </ul>
+                            <p class="red-text"><b>Possible Causes:</b></p>
+                            <ul class="red-text">
+                                <% const randomCauses = attribute.causes.high.sort(() => Math.random() - 0.5).slice(0, 2);
+                                    randomCauses.forEach(cause => { %>
+                                    <li><%= cause %></li>
+                                <% }); %>
+                            </ul>
+                        <% }
+                    } %>
+            </div>
+        </div>
+    </li>
+                <script>
+                    google.charts.load('current', { 'packages': ['gauge'] });
+                    google.charts.setOnLoadCallback(drawChart<%= attribute.name %>);
+
+                    function drawChart<%= attribute.name %>() {
+                        var data = google.visualization.arrayToDataTable([
+                            ['Label', 'Value'],
+                            ['<%= attribute.label %>', <%= customer[attribute.name] %>]
+                        ]);
+
+                        var options = {
+                            width: 400, height: 120,
+                            redFrom: <%= dynamicMax  %> * 0.9, redTo: <%= dynamicMax %>,
+                            // redFrom: <%= dynamicMin  %> * 0.9, redTo: <%= dynamicMin %>,
+                            // yellowFrom: <%= dynamicMax  %> * 0.75, yellowTo: <%= dynamicMax %> * 0.9,
+                            yellowFrom: <%= dynamicMin  %> * 0.75, yellowTo: <%= dynamicMin %> * 0.9,
+                            greenFrom: <%= attribute.min  %> , greenTo: <%= attribute.max %> * 0.9,
+                           
+                            minorTicks: 100
+                        };
+
+                        var chart = new google.visualization.Gauge(document.getElementById('<%= attribute.name %>_chart'));
+
+                        chart.draw(data, options);
+                    }
+                </script>
+            <% }); %>
+
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col" style="max-width: auto">
+                        <b>Health Suggestions</b>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li>Remember to consult with a healthcare professional for personalized advice.</li>
+                            <li>Maintain a balanced diet and stay hydrated.</li>
+                            <li>Regular exercise and adequate sleep are crucial for overall well-being.</li>
+                        </ul>
                     </div>
                 </div>
             </li>
-        <% }); %>
-
-        <!-- Health Suggestions Section -->
-        <li class="list-group-item">
-            <div class="row">
-                <div class="col" style="max-width: auto">
-                    <b>Health Suggestions</b>
-                </div>
-                <div class="col">
-                    <ul>
-                        <li>Remember to consult with a healthcare professional for personalized advice.</li>
-                        <li>Maintain a balanced diet and stay hydrated.</li>
-                        <li>Regular exercise and adequate sleep are crucial for overall well-being.</li>
-                    </ul>
-                </div>
-            </div>
-        </li>
-
-    </ul>
+        </ul>
     </div>
-</body>
-<script>
-    let button = document.getElementById("button");
-    let makepdf = document.getElementById("makepdf");
- 
-    button.addEventListener("click", function () {
-        let mywindow = window.open("", "PRINT",
+
+    <script>
+        let button = document.getElementById("button");
+        let makepdf = document.getElementById("makepdf");
+
+        button.addEventListener("click", function () {
+            let mywindow = window.open("", "PRINT",
                 "height=400,width=600");
- 
-        mywindow.document.write(makepdf.innerHTML);
- 
-        mywindow.document.close();
-        mywindow.focus();
- 
-        mywindow.print();
-        mywindow.close();
- 
-        return true;
-    });
-</script>
+
+            mywindow.document.write(makepdf.innerHTML);
+
+            mywindow.document.close();
+            mywindow.focus();
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        });
+    </script>
+</body>
+
 </html>
