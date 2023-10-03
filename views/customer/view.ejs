@@ -1,124 +1,278 @@
-<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2"><%= customer.firstName  %> <%= customer.lastName  %></h1>
-  <div class="btn-toolbar mb-2 mb-md 0">
-    <div class="btn-group me-2">
-      <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-      <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-    </div>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="col py-3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details</title>
+    <style>
+        .green-text {
+            color: green;
+        }
 
-  <div class="row">
-    <div class="col">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-          <li class="breadcrumb-item active"><%= customer.firstName  %></li>
-        </ol>
-      </nav>
-    </div>
-    <div class="col text-end fw-lighter">
-      <b>Last Updated <%= new Date(customer.updatedAt).toUTCString() %> </b>
-      <b>UserId:</b> <%= customer._id %>
-    </div>
-  </div>
+        .red-text {
+            color: red;
+        }
 
-</div>
+        .yellow-text {
+            color: rgb(255, 128, 0);
+        }
+    </style>
+</head>
 
-<ul class="list-group">
+<body>
+    <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><%= customer.firstName %> <%= customer.lastName %></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+        </div>
+    </div>
 
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>Name:</b></div>
-      <div class="col"><%= customer.firstName %> <%= customer.lastName %></div>
+    <div class="col py-3">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><%= customer.firstName %></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col text-end fw-lighter">
+                <b>Last Updated <%= new Date(customer.updatedAt).toUTCString() %> </b>
+                <b>UserId:</b> <%= customer._id %>
+            </div>
+        </div>
     </div>
-  </li>
 
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>Tel:</b></div>
-      <div class="col"><%= customer.tel %></div>
-    </div>
-  </li>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col" style="max-width: auto"> <b>Name:</b></div>
+                <div class="col"><%= customer.firstName %> <%= customer.lastName %></div>
+            </div>
+        </li>
 
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>Email:</b></div>
-      <div class="col"><%= customer.email %></div>
-    </div>
-  </li>
-<!-- ----------------------------------- -->
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>redBloodCellCount:</b></div>
-      <div class="col"><%= customer.redBloodCellCount %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>hemoglobin:</b></div>
-      <div class="col"><%= customer.hemoglobin %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>hematocrit:</b></div>
-      <div class="col"><%= customer.hematocrit %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>meanCorpuscularVolume:</b></div>
-      <div class="col"><%= customer.meanCorpuscularVolume %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>meanCorpuscularHemoglobin:</b></div>
-      <div class="col"><%= customer.meanCorpuscularHemoglobin %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>meanCorpuscularHemoglobinConcentration:</b></div>
-      <div class="col"><%= customer.meanCorpuscularHemoglobinConcentration %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>whiteBloodCellCount:</b></div>
-      <div class="col"><%= customer.whiteBloodCellCount %></div>
-    </div>
-  </li>
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>plateletCount:</b></div>
-      <div class="col"><%= customer.plateletCount %></div>
-    </div>
-  </li>
-<!-- ----------------------------------- -->
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col" style="max-width: auto"> <b>Tel:</b></div>
+                <div class="col"><%= customer.tel %></div>
+            </div>
+        </li>
 
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>Details:</b></div>
-      <div class="col"><%= customer.details %></div>
-    </div>
-  </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col" style="max-width: auto"> <b>Email:</b></div>
+                <div class="col"><%= customer.email %></div>
+            </div>
+        </li>
 
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>Date Created:</b></div>
-      <div class="col"><%= customer.createdAt %></div>
-    </div>
-  </li>
+        <% const attributes = [
+            {
+                name: "redBloodCellCount",
+                label: "Red Blood Cell Count",
+                min: 4.5,
+                max: 5.5,
+                remedies: {
+                    low: [
+                        "Increase iron intake through foods like spinach, red meat, and lentils.",
+                        "Include vitamin B12-rich foods like fish, eggs, and dairy.",
+                        "Consider iron supplements if recommended by a doctor."
+                    ],
+                    high: [
+                        "Stay hydrated to help normalize blood volume.",
+                        "Avoid excessive iron intake from supplements or foods."
+                    ]
+                }
+            },
+            {
+                name: "hemoglobin",
+                label: "Hemoglobin",
+                min: 13.5,
+                max: 17.5,
+                remedies: {
+                    low: [
+                        "Increase iron-rich foods like lean meat, beans, and green leafy vegetables.",
+                        "Consume foods high in vitamin C to aid iron absorption.",
+                        "Consider iron supplements under medical guidance."
+                    ],
+                    high: [
+                        "Stay well-hydrated by drinking plenty of water.",
+                        "Avoid excessive iron supplements or iron-rich foods."
+                    ]
+                }
+            },
+            {
+                name: "hematocrit",
+                label: "Hematocrit",
+                min: 38.8,
+                max: 50.0,
+                remedies: {
+                    low: [
+                        "Focus on iron-rich foods and vitamin B6 to support red blood cell production.",
+                        "Consider a diet rich in folate, such as dark green vegetables."
+                    ],
+                    high: [
+                        "Stay well-hydrated.",
+                        "Exercise regularly to improve blood flow."
+                    ]
+                }
+            },
+            {
+                name: "meanCorpuscularVolume",
+                label: "Mean Corpuscular Volume",
+                min: 80.0,
+                max: 100.0,
+                remedies: {
+                    low: [
+                        "Consume more iron, B vitamins, and foods like whole grains and nuts."
+                    ],
+                    high: [
+                        "Ensure a balanced diet with essential nutrients.",
+                        "Limit alcohol consumption."
+                    ]
+                }
+            },
+            {
+                name: "meanCorpuscularHemoglobin",
+                label: "Mean Corpuscular Hemoglobin",
+                min: 27.0,
+                max: 33.0,
+                remedies: {
+                    low: [
+                        "Focus on iron-rich foods and vitamin B6."
+                    ],
+                    high: [
+                        "Maintain a balanced diet with a variety of nutrients."
+                    ]
+                }
+            },
+            {
+                name: "meanCorpuscularHemoglobinConcentration",
+                label: "Mean Corpuscular Hemoglobin Concentration",
+                min: 32.0,
+                max: 36.0,
+                remedies: {
+                    low: [
+                        "Focus on iron-rich foods and vitamin B6.",
+                        "Stay well-hydrated."
+                    ],
+                    high: [
+                        "Consume a balanced diet with a variety of nutrients.",
+                        "Stay hydrated."
+                    ]
+                }
+            },
+            {
+                name: "whiteBloodCellCount",
+                label: "White Blood Cell Count",
+                min: 4000,
+                max: 11000,
+                remedies: {
+                    low: [
+                        "Include immune-boosting foods like garlic, ginger, and yogurt.",
+                        "Avoid exposure to sick individuals."
+                    ],
+                    high: [
+                        "Rest and get adequate sleep.",
+                        "Avoid strenuous activities and stressful situations."
+                    ]
+                }
+            },
+            {
+                name: "plateletCount",
+                label: "Platelet Count",
+                min: 150000,
+                max: 450000,
+                remedies: {
+                    low: [
+                        "Consume foods rich in vitamin K, like leafy greens and broccoli.",
+                        "Avoid activities that may cause bleeding or injury."
+                    ],
+                    high: [
+                        "Stay well-hydrated.",
+                        "Monitor and manage any underlying health conditions."
+                    ]
+                }
+            }
+        ]; %>
 
-  <li class="list-group-item"> 
-    <div class="row">
-      <div class="col" style="max-width: auto"> <b>Date Modified:</b></div>
-      <div class="col"><%= customer.updatedAt %></div>
-    </div>
-  </li>
+        <% attributes.forEach(attribute => { %>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col" style="max-width: auto"> <b><%= attribute.label %>:</b></div>
+                    <div class="col">
+                        <% const value = customer[attribute.name];
+                            const min = attribute.min;
+                            const max = attribute.max;
+                            const borderlineRange = (max - min) * 0.1; // Calculate 10% of the range
 
-</ul>
+                            if (value >= min && value <= max) { %>
+                                <span class="green-text"><%= value %></span>
+                                <span class="green-text"> (In Range)</span>
+                                <p class="green-text">Good job!</p>
+                            <% } else if (value < min) {
+                                if (value >= min - borderlineRange) { %>
+                                    <span class="yellow-text"><%= value %></span>
+                                    <span class="yellow-text"> (Borderline Low)</span>
+                                    <ul class="yellow-text">
+                                        <% attribute.remedies.low.forEach(remedy => { %>
+                                            <li><%= remedy %></li>
+                                        <% }); %>
+                                    </ul>
+                                <% } else { %>
+                                    <span class="red-text"><%= value %></span>
+                                    <span class="red-text"> (Low)</span>
+                                    <ul class="red-text">
+                                        <% attribute.remedies.low.forEach(remedy => { %>
+                                            <li><%= remedy %></li>
+                                        <% }); %>
+                                    </ul>
+                                <% }
+                            } else {
+                                if (value <= max + borderlineRange) { %>
+                                    <span class="yellow-text"><%= value %></span>
+                                    <span class="yellow-text"> (Borderline High)</span>
+                                    <ul class="yellow-text">
+                                        <% attribute.remedies.high.forEach(remedy => { %>
+                                            <li><%= remedy %></li>
+                                        <% }); %>
+                                    </ul>
+                                <% } else { %>
+                                    <span class="red-text"><%= value %></span>
+                                    <span class="red-text"> (High)</span>
+                                    <ul class="red-text">
+                                        <% attribute.remedies.high.forEach(remedy => { %>
+                                            <li><%= remedy %></li>
+                                        <% }); %>
+                                    </ul>
+                                <% }
+                            } %>
+                    </div>
+                </div>
+            </li>
+        <% }); %>
+
+        <!-- Health Suggestions Section -->
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col" style="max-width: auto">
+                    <b>Health Suggestions</b>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li>Remember to consult with a healthcare professional for personalized advice.</li>
+                        <li>Maintain a balanced diet and stay hydrated.</li>
+                        <li>Regular exercise and adequate sleep are crucial for overall well-being.</li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</body>
+
+</html>
